@@ -1,0 +1,4 @@
+def zip(*arrays)
+
+
+end
