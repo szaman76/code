@@ -1,27 +1,41 @@
 def zip(*arrays)
+    length = arrays.first.length
 
-    new_array = Array.new(3){Array.new}
-
-    arrays.each_with_index do |array,array_inde|
-        array.each_with_index do |ele,index|
-            new_array[index][array_inde] = ele
-        end
+    (0...length).map do |i|
+        arrays.map { |array| array[i] }
     end
-
-    new_array
-
 end
 
-def prizz_proc(array,prc1,prc2)
+def prizz_proc(array, prc_1, prc_2)
+    array.select do |el|
+        (prc_1.call(el) && !prc_2.call(el)) || (!prc_1.call(el) && prc_2.call(el))
+    end
+end
 
-    new_array = []
+def zany_zip(*arrays)
+    length = arrays.map(&:length).max
 
-        array.each do |ele|
-            if prc1.call(ele) && !prc2.call(ele) || prc2.call(ele) && !prc1.call(ele)
-              new_array << ele
-            end  
-        end
-    new_array
+    (0...length).map do |i|
+        arrays.map { |array| array[i] }
+    end
 end
 
 
+def maximum(array, &block)
+
+    return nil if array.empty?
+    max = array.first
+    array.each do |el|
+        max = el if block.call(el) >= block.call(max)        
+    end
+    max
+end
+
+def my_group_by(array, &block)
+
+    new_hash = Hash.new {|h,k| h[k] = []}
+    array.each do |el|
+        new_hash[block.call(el)] << el
+    end
+    new_hash
+end
