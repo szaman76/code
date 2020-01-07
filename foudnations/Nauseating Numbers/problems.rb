@@ -235,17 +235,61 @@ end
 # p tribonacci_number(7)  # 24
 # p tribonacci_number(11) # 274
 
-
-
 def tribonacci_number(number)
-
     return 1 if number == 1
     return 1 if number == 2
     return 2 if number == 3
 
     tribonacci_number(number- 1) + tribonacci_number(number - 2) + tribonacci_number(number - 3)
+end
+
+
+
+
+# matrix_addition_reloaded
+# Write a method matrix_addition_reloaded that accepts any number of matrices as arguments. 
+# The method should return a new matrix representing the sum of the arguments. 
+# Matrix addition can only be performed on matrices of similar dimensions, so if all of the given matrices do not have the same "height" and "width", 
+# then return nil.
+
+# Examples
+
+# matrix_a = [[2,5], [4,7]]
+# matrix_b = [[9,1], [3,0]]
+# matrix_c = [[-1,0], [0,-1]]
+# matrix_d = [[2, -5], [7, 10], [0, 1]]
+# matrix_e = [[0 , 0], [12, 4], [6,  3]]
+
+# p matrix_addition_reloaded(matrix_a, matrix_b)              # [[11, 6], [7, 7]]
+# p matrix_addition_reloaded(matrix_a, matrix_b, matrix_c)    # [[10, 6], [7, 6]]
+# p matrix_addition_reloaded(matrix_e)                        # [[0, 0], [12, 4], [6, 3]]
+# p matrix_addition_reloaded(matrix_d, matrix_e)              # [[2, -5], [19, 14], [6, 4]]
+# p matrix_addition_reloaded(matrix_a, matrix_b, matrix_e)    # nil
+# p matrix_addition_reloaded(matrix_d, matrix_e, matrix_c)    # nil
+
+
+def matrix_addition_reloaded(*matrix)
+
+    return matrix[0] if matrix.length == 1 
+    len = matrix[0].length
+    
+    matrix.each do |matr|
+        if matr.length != len
+            return nil
+        end
+    end
+
+    if matrix.length == 2
+        matrix_addition(matrix[0],matrix[1])
+    elsif matrix.length == 3
+        matrix_addition(matrix[0], matrix_addition(matrix[1],matrix[2]))
+    end
+
 
 end
+
+
+
 
 
 
