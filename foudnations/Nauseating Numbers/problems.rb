@@ -152,26 +152,34 @@ end
 # 2 5  +  9 1  =>  11 6
 # 4 7     3 0      7 7
 # Examples
+# matrix_a = [[2,5], [4,7]]
+# matrix_b = [[9,1], [3,0]]
+# matrix_c = [[-1,0], [0,-1]]
+# matrix_d = [[2, -5], [7, 10], [0, 1]]
+# matrix_e = [[0 , 0], [12, 4], [6,  3]]
+
+# p matrix_addition(matrix_a, matrix_b) # [[11, 6], [7, 7]]
+# p matrix_addition(matrix_a, matrix_c) # [[1, 5], [4, 6]]
+# p matrix_addition(matrix_b, matrix_c) # [[8, 1], [3, -1]]   
+# p matrix_addition(matrix_d, matrix_e) # [[2, -5], [19, 14], [6, 4]]
 
 
-def matrix_addition(matr_1, matr_2)
 
+def matrix_addition(matrix_1, matrix_2)
+#debugger
+    len = matrix_1.length
+    new_arr = Array.new(len) {Array.new(2, 0)}
 
-        
-
-
+    new_arr.each_with_index do |array, idx|
+        array.each_with_index do |el, index|
+            new_arr[idx][index] = matrix_1[idx][index] + matrix_2[idx][index]
+        end
+    end
+    new_arr
 end
 
 
-matrix_a = [[2,5], [4,7]]
-matrix_b = [[9,1], [3,0]]
-matrix_c = [[-1,0], [0,-1]]
-matrix_d = [[2, -5], [7, 10], [0, 1]]
-matrix_e = [[0 , 0], [12, 4], [6,  3]]
 
-p matrix_addition(matrix_a, matrix_b) # [[11, 6], [7, 7]]
-p matrix_addition(matrix_a, matrix_c) # [[1, 5], [4, 6]]
-p matrix_addition(matrix_b, matrix_c) # [[8, 1], [3, -1]]
-p matrix_addition(matrix_d, matrix_e) # [[2, -5], [19, 14], [6, 4]]
+
 
 
