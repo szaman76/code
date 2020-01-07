@@ -178,6 +178,74 @@ def matrix_addition(matrix_1, matrix_2)
     new_arr
 end
 
+# mutual_factors
+# Write a method mutual_factors that accepts any amount of numbers as arguments. 
+# The method should return an array containing all of the common divisors shared among the arguments. 
+# For example, the common divisors of 50 and 30 are 1, 2, 5, 10. You can assume that all of the arguments are positive integers.
+
+# Examples
+# p mutual_factors(50, 30)            # [1, 2, 5, 10]
+# p mutual_factors(50, 30, 45, 105)   # [1, 5]
+# p mutual_factors(8, 4)              # [1, 2, 4]
+# p mutual_factors(8, 4, 10)          # [1, 2]
+# p mutual_factors(12, 24)            # [1, 2, 3, 4, 6, 12]
+# p mutual_factors(12, 24, 64)        # [1, 2, 4]
+# p mutual_factors(22, 44)            # [1, 2, 11, 22]
+# p mutual_factors(22, 44, 11)        # [1, 11]
+# p mutual_factors(7)                 # [1, 7]
+# p mutual_factors(7, 9)              # [1]
+
+def divisorss(num)
+    arr = []
+    (1..num).each do |div|
+        if num % div == 0
+            arr << div
+        end
+    end
+    arr
+end
+
+def mutual_factors(*number)
+
+    arr = []
+    mutual = divisorss(number[0])
+    number.each do |num|
+        arr = divisorss(num)
+        mutual = mutual & arr
+    end
+    mutual
+
+end
+
+
+# tribonacci_number
+# The tribonacci sequence is similar to that of Fibonacci. The first three numbers of the tribonacci sequence are 1, 1, and 2. 
+# To generate the next number of the sequence, we take the sum of the previous three numbers. The first six numbers of tribonacci sequence are:
+
+# 1, 1, 2, 4, 7, 13, ... and so on
+# Write a method tribonacci_number that accepts a number argument, n, and returns the n-th number of the tribonacci sequence.
+
+#Examples
+# p tribonacci_number(1)  # 1
+# p tribonacci_number(2)  # 1
+# p tribonacci_number(3)  # 2
+# p tribonacci_number(4)  # 4
+# p tribonacci_number(5)  # 7
+# p tribonacci_number(6)  # 13
+# p tribonacci_number(7)  # 24
+# p tribonacci_number(11) # 274
+
+
+
+def tribonacci_number(number)
+
+    return 1 if number == 1
+    return 1 if number == 2
+    return 2 if number == 3
+
+    tribonacci_number(number- 1) + tribonacci_number(number - 2) + tribonacci_number(number - 3)
+
+end
 
 
 
