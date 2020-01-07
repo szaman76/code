@@ -39,3 +39,57 @@ def my_group_by(array, &block)
     end
     new_hash
 end
+
+def max_tie_breaker(array, prc, &block)
+
+    return nil if array.empty?
+    max = array.first
+    array.each do |el|
+        chech_el = block.call(el)
+        max_el = block.call(max) 
+        if chech_el > max_el 
+            max = el
+        elsif chech_el == max_el && prc.call(el) > prc.call(max)
+            max = el      
+        end
+    end
+    max
+end
+
+def change_word(word)
+    index = vowels_index(word)
+    word[index[0]..index[-1]]
+end
+
+def vowels_index(word)
+    vowels = "aeiou"
+    vowels_index = []
+
+    word.each_char.with_index do |char, i|
+        if vowels.include?(char)
+            vowels_index << i
+        end
+    end
+    vowels_index    
+
+end
+
+def silly_syllables(string)
+    words = string.split(' ')
+
+    new_words = words.map do |word|
+        vowels_number = vowels_index(word).length
+        if vowels_number < 2
+            word
+        else
+            change_word(word)
+        end
+    end
+
+    new_words.join(" ")
+    
+end
+
+
+
+p silly_syllables('properly and precisely written code')
