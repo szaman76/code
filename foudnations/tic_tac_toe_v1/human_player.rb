@@ -1,3 +1,4 @@
+
 require_relative "board"
 class HumanPlayer
 
@@ -5,9 +6,8 @@ class HumanPlayer
 
     def initialize(mark)
         @mark = mark
-        @board = Board.new
     end
-
+    
     def get_position
         puts "enter the position as two numbers [row, col]"
         puts "You are playing with #{@mark}"
@@ -16,24 +16,21 @@ class HumanPlayer
         if ("a".."z").include?(pos[0]) || ("a".."z").include?(pos[2]) 
             p "please put numbers"
             self.get_position
-            return false
+            #false
         end
         if pos.length != 3
             p "wrong positions put two numbers with space in between"
             self.get_position
-            return false
+            #false
         end
         if !(0..2).include?(pos[0].to_i) || !(0..2).include?(pos[2].to_i)
             p "please put numbers in between 0 and 2"
             self.get_position
-            return false
+            #false
         end
-        # if @board.place_mark(pos,@mark)
-        #     self.get_position
-        #     return false
-        # end
-        true
         return [pos[0].to_i,pos[2].to_i]
+        true
+        
     end
 
 end

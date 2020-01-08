@@ -26,7 +26,9 @@ class Game
 
         while @board.empty_positions?
             position = @current_player.get_position
-            @board.place_mark(position,@current_player.mark)
+            while !@board.place_mark(position,@current_player.mark)
+                position = @current_player.get_position
+            end
             if @board.win?(@current_player.mark)
                 return
             else
@@ -35,7 +37,8 @@ class Game
         end
 
         puts "draw"
-        true
+        return true
     end
 
 end
+

@@ -6,14 +6,18 @@ class Board
         @grid = Array.new(3) {Array.new(3,'_')}
     end
 
-    #if @grid[1,1] is valid return true
     def valid?(pos)
-        return false if pos[0] < 0 || pos[1] < 0
-        @grid[pos[0]][pos[1]] != nil
+        row, col = pos
+        pos.all? do |i|
+            0 <= i && i < @grid.length
+        end
     end
+
+
     # if @grid [1,1] == '_' return true
     def empty?(pos)
-        @grid[pos[0]][pos[1]] == '_'
+        return true if @grid[pos[0]][pos[1]] == '_'
+        false
     end
 
     def place_mark(pos,mark)
@@ -22,6 +26,7 @@ class Board
             return false
         end
         @grid[pos[0]][pos[1]] = mark
+        true
     end
     
     def print
@@ -54,21 +59,33 @@ class Board
     end
 
     def win_diagonal?(mark)
+        base = @grid
+        second_base = @grid.reverse
         len = @grid.length - 1
         (0..len).each do |i|
-            if mark != @grid[i][i] && mark != @grid[i][-i - 1]
+            if mark != base[i][i] && mark != second_base[i][i]
                 return false
             end
         end
         p "Player #{mark} won diagonal"
         p "Player #{mark} is a winner"
-        true
+        return true
     end
 
+    # def win_diagonal?(mark)
+    #     len = @grid.length - 1
+    #     (0..len).each do |i|
+    #         if mark != @grid[i][i] && mark != @grid[i][-i - 1]
+    #             return false
+    #         end
+    #     end
+    #     p "Player #{mark} won diagonal"
+    #     p "Player #{mark} is a winner"
+    #     true
+    # end
+
     def win?(mark)
-        if win_row?(mark) || win_col?(mark) || win_diagonal?(mark)
-            return true 
-        end
+        win_row?(mark) || win_col?(mark) || win_diagonal?(mark)
     end
 
     def empty_positions?
@@ -90,6 +107,26 @@ end
 # ["_", "X", "_"]
 
 # ["_", "_", "O"]
+
+# ["1", "2", "3"]
+
+# ["4", "5", "6"]
+
+# ["7", "8", "9"]
+
+
+
+# ["7", "8", "9"]
+
+# ["4", "5", "6"]
+
+# ["1", "2", "3"]
+
+
+
+
+
+
 # tik = Board.new
 # tik.place_mark([0,0],"X")
 # tik.place_mark([0,1],"O")
