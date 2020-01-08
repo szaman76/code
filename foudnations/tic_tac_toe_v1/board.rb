@@ -31,6 +31,8 @@ class Board
     def win_row?(mark)
         @grid.each do |row|
             if row.all? {|word| word == mark}
+                p "Player #{mark} won with rows"
+                p "Player #{mark} is a winner"
                 return true
             end
         end
@@ -40,6 +42,8 @@ class Board
     def win_col?(mark)
         @grid.transpose.each do |col|
             if col.all? {|word| word == mark}
+                p "Player #{mark} won with collumns"
+                p "Player #{mark} is a winner"
                 return true
             end
         end
@@ -56,10 +60,29 @@ class Board
                 return false
             end
         end
+        p "Player #{mark} won diagonal"
+        p "Player #{mark} is a winner"
         true
     end
 
+    def win?(mark)
+        if win_row?(mark) || win_col?(mark) || win_diagonal?(mark)
+            return true 
+        end
+    end
 
+    def empty_positions?
+        @grid.each do |row|
+            row.each do |ele|
+                if ele == "_"
+                    p "grid has empty pos"
+                    self.print
+                    return true
+                end
+            end
+        end
+        false
+    end
 
 end
 # ["_", "_", "_"]
@@ -67,18 +90,20 @@ end
 # ["_", "X", "_"]
 
 # ["_", "_", "O"]
-tik = Board.new
-tik.place_mark([0,0],"X")
+# tik = Board.new
+# tik.place_mark([0,0],"X")
 # tik.place_mark([0,1],"O")
-tik.place_mark([0,2],"O")
-tik.place_mark([1,0],"X")
-tik.place_mark([1,1],"O")
-tik.place_mark([1,2],"O")
-tik.place_mark([2,0],"O")
-# tik.place_mark([2,1],"X")
-tik.place_mark([2,2],"X")
-tik.print
+# tik.place_mark([0,2],"O")
+# tik.place_mark([1,0],"X")
+# tik.place_mark([1,1],"O")
+# tik.place_mark([1,2],"O")
+# tik.place_mark([2,0],"O")
+# #tik.place_mark([2,1],"X")
+# tik.place_mark([2,2],"X")
+# tik.print
 
-p tik.win_row?("O")
-p tik.win_col?("O")
-p tik.win_diagonal?("O")
+# p tik.win_row?("O")
+# p tik.win_col?("O")
+# p tik.win_diagonal?("O")
+# p tik.win?("O")
+# p tik.empty_positions?
