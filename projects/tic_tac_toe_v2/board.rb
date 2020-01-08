@@ -2,8 +2,8 @@ class Board
 
     attr_reader :grid
 
-    def initialize
-        @grid = Array.new(3) {Array.new(3,'_')}
+    def initialize(n)
+        @grid = Array.new(n) {Array.new(n,'_')}
     end
 
     def valid?(pos)
@@ -12,8 +12,6 @@ class Board
             0 <= i && i < @grid.length
         end
     end
-
-
     # if @grid [1,1] == '_' return true
     def empty?(pos)
         return true if @grid[pos[0]][pos[1]] == '_'

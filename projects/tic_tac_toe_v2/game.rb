@@ -5,10 +5,10 @@ class Game
     attr_reader :current_player
 
 
-    def initialize(player_1_mark, player_2_mark)
+    def initialize(n, player_1_mark, player_2_mark)
         @player_1 = HumanPlayer.new(player_1_mark)
         @player_2 = HumanPlayer.new(player_2_mark)
-        @board = Board.new
+        @board = Board.new(n)
         @current_player = @player_1
     end
 
