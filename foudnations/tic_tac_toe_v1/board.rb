@@ -52,9 +52,6 @@ class Board
 
     def win_diagonal?(mark)
         len = @grid.length - 1
-        #base = @grid[0][0]
-        #second_base = array[0][len]
-
         (0..len).each do |i|
             if mark != @grid[i][i] && mark != @grid[i][-i - 1]
                 return false
