@@ -1,10 +1,11 @@
+require_relative "board"
 class HumanPlayer
 
     attr_reader :mark
 
     def initialize(mark)
         @mark = mark
-
+        @board = Board.new
     end
 
     def get_position
@@ -27,6 +28,10 @@ class HumanPlayer
             self.get_position
             return false
         end
+        # if @board.place_mark(pos,@mark)
+        #     self.get_position
+        #     return false
+        # end
         true
         return [pos[0].to_i,pos[2].to_i]
     end

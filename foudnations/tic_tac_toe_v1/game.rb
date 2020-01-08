@@ -22,5 +22,20 @@ class Game
         end
     end
 
+    def game
+
+        while @board.empty_positions?
+            position = @current_player.get_position
+            @board.place_mark(position,@current_player.mark)
+            if @board.win?(@current_player.mark)
+                return
+            else
+                self.switch_turn
+            end
+        end
+
+        puts "draw"
+        true
+    end
 
 end

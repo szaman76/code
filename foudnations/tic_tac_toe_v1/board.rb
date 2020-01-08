@@ -17,7 +17,10 @@ class Board
     end
 
     def place_mark(pos,mark)
-        return "Error: pos is invalid" if !self.valid?(pos) || !self.empty?(pos)
+        if !self.valid?(pos) || !self.empty?(pos)
+            p "Error: pos is invalid" 
+            return false
+        end
         @grid[pos[0]][pos[1]] = mark
     end
     
@@ -72,7 +75,7 @@ class Board
         @grid.each do |row|
             row.each do |ele|
                 if ele == "_"
-                    p "grid has empty pos"
+                    #p "grid has empty pos"
                     self.print
                     return true
                 end
