@@ -1,17 +1,23 @@
 class Item
 
-    attr_reader :title, :deadline, :description
+    attr_reader :deadline
+    attr_accessor :title, :description
 
     def self.valid_date?(date_string)
-        date_array = date_string.split("-")
-        raise 'sorry, that date was invalid :(' if !(1..12).include?(date_array[1].to_i) || !(1..31).include?(date_array[2].to_i)
+        date_array = date_string.split('-').map(&:to_i)
+        year, month, day = date_array
+        return false if date_array.length != 3
+        return false if !(0..12).include?(month)
+        return false if !(0..31).include?(day)
+        true
     end
 
     def initialize(title, deadline, description)
+        raise "data is not valid" if !Item.valid_date?(deadline) 
         @title = title
         @deadline = deadline
         @description = description
-        Item.valid_date?(deadline) 
+        
     end 
 
     def title=(new_title)
@@ -19,7 +25,7 @@ class Item
     end
 
     def deadline=(new_deadline)
-        Item.valid_date?(new_deadline)
+        raise "data is not valid" if !Item.valid_date?(deadline)
         @deadline = new_deadline
     end
 
