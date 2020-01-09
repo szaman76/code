@@ -5,21 +5,14 @@ class Game
     attr_reader :current_player
 
 
-    def initialize(n, player_1_mark, player_2_mark)
-        @player_1 = HumanPlayer.new(player_1_mark)
-        @player_2 = HumanPlayer.new(player_2_mark)
+    def initialize(n, *marks)
+        @players = marks.map {|mark| HumanPlayer.new(mark)}
         @board = Board.new(n)
-        @current_player = @player_1
+        @current_player = @players.first
     end
 
     def switch_turn
-        if @current_player == @player_1
-            @current_player = @player_2
-            true
-        else
-            @current_player = @player_1
-            true
-        end
+        @current_player = @players.rotate![0]
     end
 
     def game
@@ -27,17 +20,19 @@ class Game
         while @board.empty_positions?
             position = @current_player.get_position
             while !@board.place_mark(position,@current_player.mark)
-                position = @current_player.get_position
-            end
+                    position = @current_player.get_position
+                end
             if @board.win?(@current_player.mark)
+                puts 'Game Over'
+                puts @current_player.mark.to_s + ' HAS WON!'
                 return
             else
                 self.switch_turn
             end
         end
-
+        puts 'Game Over'
         puts "draw"
-        return true
+
     end
 
 end
