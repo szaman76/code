@@ -1,6 +1,6 @@
 class Item
 
-    attr_reader :deadline
+    attr_reader :deadline, :done
     attr_accessor :title, :description
 
     def self.valid_date?(date_string)
@@ -31,6 +31,10 @@ class Item
 
     def description=(new_description)
         @description = new_description
+    end
+
+    def toggle
+        @done = !@done
     end
 
 

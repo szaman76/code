@@ -18,6 +18,12 @@ class TodoBoard
             @list.down(*args.map(&:to_i))
         when 'swap'
             @list.swap(*args.map(&:to_i))
+        when 'toggle'
+            @list.toggle_item(*args.map(&:to_i))
+        when 'rm'
+            @list.remove_item(*args.map(&:to_i))
+        when 'purge'
+            @list.purge
         when 'sort'
             @list.sort_by_date!
         when 'priority'
