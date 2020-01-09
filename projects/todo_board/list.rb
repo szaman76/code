@@ -2,15 +2,15 @@ require_relative "item"
 class List
 
     attr_accessor :label
-
+    # def label=(new_label)
+    #     @label = new_label
+    # end
+    
     def initialize(label)
         @label = label
         @items = []
     end
 
-    # def label=(new_label)
-    #     @label = new_label
-    # end
 
     def add_item(title, deadline, description = "")
         return false if !Item.valid_date?(deadline)

@@ -17,7 +17,7 @@ class Item
         @title = title
         @deadline = deadline
         @description = description
-        
+        @done = false
     end 
 
     def title=(new_title)
