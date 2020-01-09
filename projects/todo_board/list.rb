@@ -45,7 +45,7 @@ class List
 
     def print
         puts "------------------------------------------"
-        puts "                GROCERIES                 "
+        puts "                #{self.label.upcase}                 "
         puts "------------------------------------------"
         puts "Index | Item       | Deadline       | Done"
         puts "------------------------------------------"
