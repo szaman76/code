@@ -91,7 +91,7 @@ class Board
             row.each do |ele|
                 if ele == "_"
                     #p "grid has empty pos"
-                    self.print
+                    #self.print
                     return true
                 end
             end
@@ -99,6 +99,17 @@ class Board
         false
     end
 
+    def legal_positions
+        arr = []
+        @grid.each_with_index do |row,idx|
+            row.each_with_index do |el,index|
+                if el == "_"
+                    arr << [idx,index]
+                end
+            end
+        end
+        arr
+    end
 end
 # ["_", "_", "_"]
 

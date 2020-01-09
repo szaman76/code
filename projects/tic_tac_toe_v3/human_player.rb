@@ -1,5 +1,4 @@
 
-require_relative "board"
 class HumanPlayer
 
     attr_reader :mark
@@ -8,11 +7,15 @@ class HumanPlayer
         @mark = mark
     end
     
-    def get_position
-        puts "enter the position as two numbers [row, col]"
-        puts "You are playing with #{@mark}"
-        pos = gets.chomp.split(" ").map(&:to_i)
-        raise 'sorry, that was invalid :(' if pos.length != 2
+    def get_position(legal_position)
+        pos = nil
+        while !legal_position.include?(pos)
+            puts "enter the position as two numbers [row, col]"
+            puts "You are playing with #{@mark}"
+            pos = gets.chomp.split(" ").map(&:to_i)
+            puts "#{pos} is not legal"if !legal_position.include?(pos)
+            raise 'sorry, that was invalid :(' if pos.length != 2
+        end
         pos
         # if ("a".."z").include?(pos[0]) || ("a".."z").include?(pos[2]) 
         #     p "please put numbers"
