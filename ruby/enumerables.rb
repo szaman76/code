@@ -80,11 +80,29 @@ require "byebug"
             rotated
         end
 
+        def my_join(separator = "")
+            joined = ""
+
+            self.length.times do |i|
+                joined += self[i]
+                joined += separator unless i == self.length - 1
+            end
+            joined
+        end
+
+        def my_reverse
+            #debugger
+            new_arr = []
+
+            self.length.times do |i|
+                new_arr << self[-i - 1]
+                #reversed.unshift(el)
+            end
+
+            new_arr
+        end
+
     end
 
-a = [1, 2, 3]
-[1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten
-p a.my_any? { |num| num > 1 } # => true
-p a.my_any? { |num| num == 4 } # => false
-p a.my_all? { |num| num > 1 } # => false
-p a.my_all? { |num| num < 4 } # => true
+   p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+   p [ 1 ].my_reverse               #=> [1]
