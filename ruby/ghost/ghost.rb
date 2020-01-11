@@ -3,29 +3,37 @@ require_relative "player"
 
 class Game
     ALPHABET = Set.new("a".."z")
-    MAX_LOSS_COUNT = 5
+    #MAX_LOSS_COUNT = 5
 
-    def initialize(*players)
+    attr_reader :dictionary, :fragment, :player_2, :player_1
+    attr_writer :fragment
+
+    def initialize(player_1, player_2)
         words = File.readlines("dictionary.txt").map(&:chomp)
         @dictionary = Set.new(words)
-        @players = players
-        @losses = Hash.new { |losses, player| losses[player] = 0 }
-    end
-
-
-    def play_round
+        @player_1 = player_1
+        @player_2 = player_2
+        # @losses = Hash.new { |losses, player| losses[player] = 0 }
         @fragment = ""
     end
 
-    def add_letter(letter)
-        if valid?(@fragment + letter)
-            @fragment += letter
-        else
-            raise "not valid word"
-        end
-    end 
+
+    # def play_round
+    #     @fragment = ""
+    # end
 
     
+    def add_letter(letter)
+        @fragment << letter
+    end 
+
+    def valid_play?(letter)
+        return false unless ALPHABET.include?(letter)
+
+        new_fragment = @fragment + letter
+        dictionary.any? {|word| word.start_with?(new_fragment)}
+    end
+
     def valid_word?(word)
         @dictionary.include?(word)
     end
@@ -35,19 +43,28 @@ class Game
     end
 
     def current_player
-        players.first
+        @player_1
     end
     
     def previous_player
-        if current_player == players.first
-            players.last
+        if current_player == @player_1
+            @player_2
         else
-            players.first
+            @player_1
         end
     end
 
     def next_player!
         
+    end
+    
+    def take_turn(player)
+        letter = gets.chomp
+        if valid_play(letter)
+
+        else
+            
+        end
     end
 
 
