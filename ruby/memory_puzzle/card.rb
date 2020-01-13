@@ -30,7 +30,9 @@ class Card
 
     def to_s
         if revealed?
-            value.to_s : " "
+            value.to_s
+        else
+            " "
         end
     end
 
