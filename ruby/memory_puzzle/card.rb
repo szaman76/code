@@ -1,16 +1,16 @@
 class Card
 
-    attr_reader :card_value
+    attr_reader :value
 
-    def initialize(card_value)
-        @card_value = card_value
-        @face_up = true
+    def initialize(value, face_up = false)
+        @value = value
+        @face_up = face_up
     end
 
 
     def show_card
         if @face_up
-            return @card_value
+            return @value
         else
             return ""
         end
@@ -24,12 +24,18 @@ class Card
         @face_up = true
     end
 
-    def to_s(ele)
-
+    def revealed?
+        @face_up
     end
 
-    def ==()
+    def to_s
+        if revealed?
+            value.to_s : " "
+        end
+    end
 
+    def ==(other_card)
+        @other_card.is_a?(self.class) && other_card.value == value
     end
 
 end
