@@ -4,9 +4,16 @@ size = 4
 grid = Array.new(size) {Array.new(size)}
 
 def populate(asd)
+    card_values = (0..7).to_a + (0..7).to_a
+    card_values.shuffle!
+
     asd.map! do |row|
-        row=*(1..row.length)
+        row.map! do |ele|
+            ele = card_values.pop
+        end
     end
+    p asd
+
 
 end
 
