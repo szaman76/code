@@ -24,15 +24,16 @@ class Board
     end
 
     def populate
-        card_values = (0..9).to_a + (0..9).to_a
+        card_values = (0..7).to_a + (0..7).to_a
         card_values.shuffle!
 
-        asd.map! do |row|
+        @grid.map! do |row|
             row.map! do |ele|
                 ele = card_values.pop
             end
         end
-        p card_values
+        
+        p @grid
 
     end
 
